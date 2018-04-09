@@ -1,0 +1,8 @@
+{
+  "name": "BabelIn",
+  "app_id": "2e5138cb",
+  "type": "ionic-angular",
+  "integrations": {
+    "cordova": {}
+  }
+}
