@@ -89,5 +89,6 @@
         <variable name="APP_ID" value="168972750469848" />
         <variable name="APP_NAME" value="BabelIn" />
     </plugin>
+    <allow-navigation href="http://192.168.1.35:8100" />
     <engine name="android" spec="7.0.0" />
 </widget>
