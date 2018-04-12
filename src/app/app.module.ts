@@ -13,12 +13,16 @@ import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { FIREBASE_CONFIG } from './firebase.credentials';
 
+//Hotfix for Firebase authentication
+import * as firebase from 'firebase/app';
+
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { LoginPage } from '../pages/login/login';
 import { LoginPageModule } from '../pages/login/login.module';
 
-
+//Hotifx for Firebase authentication
+firebase.initializeApp(FIREBASE_CONFIG);
 
 @NgModule({
   declarations: [
