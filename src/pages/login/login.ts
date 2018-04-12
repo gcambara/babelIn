@@ -20,7 +20,6 @@ export class LoginPage {
   showUser: boolean = false;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private facebook: Facebook) {
-
   }
 
   ionViewDidLoad() {
@@ -32,8 +31,6 @@ export class LoginPage {
       .then(response => {
       console.log(response.status);
       if (response.status == 'connected'){
-
-
         const facebookCredential = firebase.auth.FacebookAuthProvider.credential(response.authResponse.accessToken);
 
         firebase.auth().signInWithCredential(facebookCredential).
@@ -44,33 +41,6 @@ export class LoginPage {
       }
     }).catch((error) => {console.log(error)});
   }
-
-  // Code for simple login
-  // loginFacebook(): Promise<any> {
-  //   return this.facebook.login(['public_profile', 'email'])
-  //     .then(response => {
-  //       console.log(response.status);
-  //       if (response.status == 'connected') {
-  //         this.getInfo();
-  //       };
-  //     })
-  //     .catch(error => {
-  //       console.error(error);
-  //     });
-  // }
-
-  // Code for login to Facebook
-  // loginFacebook(): Promise<any> {
-  //   return this.facebook.login(['public_profile', 'email'])
-  //     .then(response => {
-  //     const facebookCredential = firebase.auth.FacebookAuthProvider.credential(response.authResponse.accessToken);
-
-  //     firebase.auth().signInWithCredential(facebookCredential).
-  //     then(success => {
-  //       console.log("Firebase success: " + JSON.stringify(success));
-  //     });
-  //   }).catch((error) => {console.log(error)});
-  // }
 
   getInfo() {
     this.facebook.api('/me?fields=id,name,email,first_name,picture,last_name,gender', ['public_profile', 'email'])
@@ -83,5 +53,4 @@ export class LoginPage {
         console.error(error);
       });
   }
-
 }

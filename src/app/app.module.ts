@@ -21,7 +21,7 @@ import { HomePage } from '../pages/home/home';
 import { LoginPage } from '../pages/login/login';
 import { LoginPageModule } from '../pages/login/login.module';
 
-//Hotifx for Firebase authentication
+//Hotfix for Firebase authentication
 firebase.initializeApp(FIREBASE_CONFIG);
 
 @NgModule({
