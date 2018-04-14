@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Facebook } from '@ionic-native/facebook';
 import firebase from 'firebase';
+import { User } from '../../models/user';
 
 /**
  * Generated class for the LoginPage page.
@@ -16,14 +17,23 @@ import firebase from 'firebase';
   templateUrl: 'login.html',
 })
 export class LoginPage {
-  user: any = {};
-  showUser: boolean = false;
+  user  = {} as User;
+  facebookUser: any = {};
+  showFacebookUser: boolean = false;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private facebook: Facebook) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad LoginPage');
+  }
+
+  loginEmail() {
+
+  }
+
+  register(){
+    this.navCtrl.push('RegisterPage');
   }
 
   loginFacebook(): Promise<any> {
@@ -46,8 +56,8 @@ export class LoginPage {
     this.facebook.api('/me?fields=id,name,email,first_name,picture,last_name,gender', ['public_profile', 'email'])
       .then(data => {
         console.log(data);
-        this.showUser = true;
-        this.user = data;
+        this.showFacebookUser = true;
+        this.facebookUser = data;
       })
       .catch(error => {
         console.error(error);
