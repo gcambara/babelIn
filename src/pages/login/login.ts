@@ -76,6 +76,15 @@ export class LoginPage {
       }).catch((error) => { console.log(error) });
   }
 
+
+  loginWithGoogle() {
+    this.auth.signInWithGoogle()
+      .then(
+        () => this.navCtrl.setRoot(HomePage),
+        error => console.log(error.message)
+      );
+  }
+
   getInfo() {
     this.facebook.api('/me?fields=id,name,email,first_name,picture,last_name,gender', ['public_profile', 'email'])
       .then(data => {

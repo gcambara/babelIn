@@ -31,7 +31,7 @@ firebase.initializeApp(FIREBASE_CONFIG);
   declarations: [
     MyApp,
     HomePage,
-    SignupPage
+    //SignupPage
   ],
   imports: [
     BrowserModule,

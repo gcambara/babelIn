@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
-import { Platform } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { App, MenuController, Nav, Platform } from 'ionic-angular';
 
 import { HomePage } from '../pages/home/home';
 import { LoginPage } from '../pages/login/login';
@@ -13,7 +13,12 @@ import { AuthService } from '../services/auth.service';
 export class MyApp {
   rootPage:any = HomePage;
 
-  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, private auth: AuthService) {
+  private menu: MenuController;
+  private platform;
+
+  @ViewChild(Nav) nav: Nav;
+
+  constructor(platform: Platform, private statusBar: StatusBar, splashScreen: SplashScreen, private auth: AuthService) {
     //gcambara: Here condition, if user has been already loaded, then
     //this.rootPage = HomePage;
     //else
@@ -24,6 +29,38 @@ export class MyApp {
       statusBar.styleDefault();
       splashScreen.hide();
     });
+  }
+
+  initializeApp() {
+      this.platform.ready().then(() => {
+      this.statusBar.styleDefault();
+    });
+
+    this.auth.afAuth.authState
+      .subscribe(
+        user => {
+          if (user) {
+            this.rootPage = HomePage;
+          } else {
+            this.rootPage = LoginPage;
+          }
+        },
+        () => {
+          this.rootPage = LoginPage;
+        }
+      );
+}
+
+  login() {
+    this.menu.close();
+    this.auth.signOut();
+    this.nav.setRoot(LoginPage);
+  }
+
+  logout() {
+    this.menu.close();
+    this.auth.signOut();
+    this.nav.setRoot(HomePage);
   }
 }
 
