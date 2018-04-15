@@ -12,6 +12,8 @@ import { Facebook } from '@ionic-native/facebook';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { FIREBASE_CONFIG } from './firebase.credentials';
+import { AuthService } from '../services/auth.service';
+import { NgxErrorsModule } from '@ultimate/ngxerrors';
 
 //Hotfix for Firebase authentication
 import * as firebase from 'firebase/app';
@@ -20,6 +22,7 @@ import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { LoginPage } from '../pages/login/login';
 import { LoginPageModule } from '../pages/login/login.module';
+import { SignupPage } from '../pages/signup/signup';
 
 //Hotfix for Firebase authentication
 firebase.initializeApp(FIREBASE_CONFIG);
@@ -28,6 +31,7 @@ firebase.initializeApp(FIREBASE_CONFIG);
   declarations: [
     MyApp,
     HomePage,
+    SignupPage
   ],
   imports: [
     BrowserModule,
@@ -35,18 +39,21 @@ firebase.initializeApp(FIREBASE_CONFIG);
     IonicModule.forRoot(MyApp),
     AngularFireModule.initializeApp(FIREBASE_CONFIG),
     AngularFireAuthModule,
+    NgxErrorsModule,
     LoginPageModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
     HomePage,
-    LoginPage
+    LoginPage,
+    SignupPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
     Facebook,
+    AuthService,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
